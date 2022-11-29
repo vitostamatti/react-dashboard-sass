@@ -14,13 +14,16 @@
       display: flex;
 
       .left {
+        display: flex;
         flex: 1;
-        text-align: center;
+        justify-content: center;
+        align-items: center;
         img {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          object-fit: cover;
+          display: flex;
+          width: 250px;
+          height: 250px;
+          border-radius: 10%;
+          object-fit: scale-down;
         }
       }
 

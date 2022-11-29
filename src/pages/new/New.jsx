@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./new.scss";
 
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -6,19 +6,25 @@ import Navbar from "../../components/navbar/Navbar";
 
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 
-const New = () => {
+const New = ({ inputs, title }) => {
+  const [file, setFile] = useState("");
+
   return (
     <div className="new">
       <Sidebar />
       <div className="newContainer">
         <Navbar />
         <div className="top">
-          <h1 className="title">Add New User</h1>
+          <h1 className="title">{title}</h1>
         </div>
         <div className="bottom">
           <div className="left">
             <img
-              src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+              src={
+                file
+                  ? URL.createObjectURL(file)
+                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+              }
               alt=""
             />
           </div>
@@ -33,9 +39,17 @@ const New = () => {
                   placeholder=""
                   id="file"
                   style={{ display: "none" }}
+                  onChange={(e) => setFile(e.target.files[0])}
                 />
               </div>
-              <div className="formInput">
+              {inputs.map((input) => (
+                <div className="formInput" key={input.id}>
+                  <label htmlFor="">{input.label}</label>
+                  <input type={input.type} placeholder={input.placeholder} />
+                </div>
+              ))}
+
+              {/* <div className="formInput">
                 <label htmlFor="">Username</label>
                 <input type="text" placeholder="username" />
               </div>
@@ -65,7 +79,8 @@ const New = () => {
               <div className="formInput">
                 <label htmlFor="">Country</label>
                 <input type="text" placeholder="Spain" />
-              </div>
+              </div> */}
+
               <button>Send</button>
             </form>
           </div>
